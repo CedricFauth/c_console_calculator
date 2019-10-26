@@ -6,6 +6,8 @@
 #include "logger.h"
 #include "token.h"
 
+#include "expression.h"
+
 int main(){
 
     int BUFFER_SIZE = 128;
@@ -13,6 +15,19 @@ int main(){
     char* input = malloc(sizeof(char) * BUFFER_SIZE);
 
     bool error = false;
+
+    /*
+    ExprNode a;
+    ExprNode b;
+    ExprNode c;
+    ExprNode d;
+
+    a.bin.op = PLUS;
+    a.bin.left = &b;
+    a.bin.right = &c;
+
+    a.bin.right->ex.next = &d;
+    */
 
     do {
 
