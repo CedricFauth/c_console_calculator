@@ -41,20 +41,26 @@ bool generate_tokens(TokenList* list, char* input_str){
 
         switch (input_str[i])
         {
+        case '(':
+            token_append(list, LEFT_P, 0.0);
+            break;
+        case ')':
+            token_append(list, RIGHT_P, 0.0);
+            break;
         case '+':
-            token_append(list, PLUS, 1.0);
+            token_append(list, PLUS, 0.0);
             break;
         case '-':
-            token_append(list, MINUS, 2.0);
+            token_append(list, MINUS, 0.0);
             break;
         case '*':
-            token_append(list, STAR, 3.0);
+            token_append(list, STAR, 0.0);
             break;
         case '/':
-            token_append(list, SLASH, 4.0);
+            token_append(list, SLASH, 0.0);
             break;
         case '\n':
-            token_append(list, ENDOFLINE, 5.0);
+            token_append(list, ENDOFLINE, 0.0);
             break;
         case 'q':
             return false;
