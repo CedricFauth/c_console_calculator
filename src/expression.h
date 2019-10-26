@@ -3,21 +3,21 @@
 
 #include "token.h"
 
-struct ExprNode;
+typedef struct ExprNode ExprNode;
 
 typedef struct Expr {
-    struct ExprNode* next;
+    ExprNode* next;
 } Expr;
 
 typedef struct ExprBin {
     TokenType op;
-    struct ExprNode* left;
-    struct ExprNode* right;
+    ExprNode* left;
+    ExprNode* right;
 } ExprBin;
 
 // TODO: ExprGrouping, ExprUnary, ExprLiteral
 
-typedef struct ExprNode {
+struct ExprNode {
 
     TokenType type;
 
@@ -27,13 +27,8 @@ typedef struct ExprNode {
         ExprBin bin;
         // ...
     };
-    
 
-} ExprNode;
-
-
-
-
+};
 
 
 
