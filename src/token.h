@@ -1,5 +1,6 @@
 #ifndef TOKEN
 #define TOKEN
+#include <stdbool.h>
 
 typedef enum TokenType{
     LEFT_P,
@@ -37,5 +38,6 @@ void print_token_list(TokenList* list);
 
 void free_token_list(TokenList* list);
 
+int size(TokenList* list);
 
 #endif

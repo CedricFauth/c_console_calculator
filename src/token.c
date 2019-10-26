@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+
 #include "token.h"
 #include "logger.h"
 
@@ -50,7 +51,38 @@ void print_token_list(TokenList* list){
     printf("{ ");
     if(list->head != NULL){
         for(TokenNode* node = list->head; node != NULL; node = node->next){
-            printf("[TOKEN:%d  VALUE:%f] ",node->type, node->value);
+
+            switch (node->type)
+            {
+            case LEFT_P:
+                printf("[TOKEN: LEFT_P] ");
+                break;
+            case RIGHT_P:
+                printf("[TOKEN: RIGHT_P] ");
+                break;
+            case PLUS:
+                printf("[TOKEN: PLUS] ");
+                break;
+            case MINUS:
+                printf("[TOKEN: MINUS] ");
+                break;
+            case STAR:
+                printf("[TOKEN: STAR] ");
+                break;
+            case SLASH:
+                printf("[TOKEN: SLASH] ");
+                break;
+            case DOUBLE:
+                printf("[TOKEN: DOUBLE -> VALUE: %f] ", node->value);
+                break;
+            case ENDOFLINE:
+                printf("[TOKEN: EOL] ");
+                break;
+            
+            default:
+                printf("[TOKEN:%d  VALUE:%f] ",node->type, node->value);
+                break;
+            }
         }
     }
     printf("}\n");
@@ -71,4 +103,8 @@ void free_token_list(TokenList* list){
 
 }
 
-
+int size(TokenList* list){
+    int c = 0;
+    for(TokenNode* node = list->head; node != NULL; node = node->next, c++);
+    return c;
+}

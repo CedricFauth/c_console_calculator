@@ -1,10 +1,9 @@
 #ifndef LEXER
 #define LEXER
 
+#include <stdbool.h>
 #include "token.h"
 
-void generate_tokens(TokenList* list, char* input_str);
-
-
+bool generate_tokens(TokenList* list, char* input_str);
 
 #endif

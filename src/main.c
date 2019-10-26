@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #include "lexer.h"
+#include "logger.h"
 #include "token.h"
 
 int main(){
@@ -10,6 +12,8 @@ int main(){
 
     char* input = malloc(sizeof(char) * BUFFER_SIZE);
 
+    bool error = false;
+
     do {
 
         fgets(input, BUFFER_SIZE, stdin);
@@ -17,8 +21,17 @@ int main(){
         printf("strlen: %lu\nstring: %s", strlen(input), input);
 
         TokenList* list = new_token_list();
-        generate_tokens(list, input);
+        error = generate_tokens(list, input);
         print_token_list(list);
+
+        if(size(list) > 1 && !error){
+            log_info("Continue parsing.");
+            //parser call
+        }
+        /*else{
+            log_warn("Error or list empty.");
+        }*/
+
         free_token_list(list);
 
     } while(strcmp(input, "q\n"));

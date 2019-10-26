@@ -34,7 +34,7 @@ double number(char* string, int *i_ptr){
     return atof(sub_string);
 }
 
-void generate_tokens(TokenList* list, char* input_str){
+bool generate_tokens(TokenList* list, char* input_str){
     
     for(int i = 0; i < strlen(input_str); i++){ //until \n linebreak
         //token_append(list, PLUS, 0.0);
@@ -57,18 +57,20 @@ void generate_tokens(TokenList* list, char* input_str){
             token_append(list, ENDOFLINE, 5.0);
             break;
         case 'q':
-            return;
+            return false;
         default:
             if(isDigit(input_str[i])){
                 printf("is number\n");
                 token_append(list, DOUBLE, number(input_str, &i));
             }else{
                 log_err_detail(input_str, "Unknown character", i);
-                return;
+                return true;
             }
         }
         //printf("%d\n", (int) *(input_str+i));
 
     }
+
+    return false;
 
 }
