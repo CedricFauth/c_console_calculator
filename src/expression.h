@@ -5,31 +5,50 @@
 
 typedef struct ExprNode ExprNode;
 
-typedef struct Expr {
-    ExprNode* next;
-} Expr;
+typedef enum ExprType {
+    BINARY,
+    GROUP,
+    UNARY,
+    NUMBER
+} ExprType;
 
-typedef struct ExprBin {
+typedef struct ExprBinary {
     TokenType op;
     ExprNode* left;
     ExprNode* right;
-} ExprBin;
+} ExprBinary;
 
-// TODO: ExprGrouping, ExprUnary, ExprLiteral
+typedef struct ExprGroup {
+    ExprNode* next;
+} ExprGroup;
+
+typedef struct ExprUnary {
+    /*
+    TODO: implement NEGATION OPERATOR
+    */
+    ExprNode* next;
+} ExprUnary;
+
+typedef struct ExprNumber {
+    double value;
+} ExprNumber;
+
 
 struct ExprNode {
 
-    TokenType type;
+    ExprType type;
 
     union
     {
-        Expr ex;
-        ExprBin bin;
-        // ...
+        ExprBinary binary;
+        ExprGroup group;
+        ExprUnary unary;
+        ExprNumber number;
     };
 
 };
 
-
+void print_ast(ExprNode* node);
+void free_ast(ExprNode* node);
 
 #endif
