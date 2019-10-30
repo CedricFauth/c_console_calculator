@@ -10,6 +10,8 @@
 
 int main(){
 
+    set_log_level(INFO);
+
     int BUFFER_SIZE = 128;
 
     char* input = malloc(sizeof(char) * BUFFER_SIZE);

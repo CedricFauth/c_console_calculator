@@ -1,27 +1,28 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "expression.h"
+#include "logger.h"
 
 void free_ast(ExprNode* node){
     if(node == NULL) return;
     if(node->type == BINARY){
-        printf("free left, right\n");
+        log_info("free left, right");
         free_ast(node->binary.left);
         free_ast(node->binary.right);
-        printf("free bin node\n");
+        log_info("free bin node");
         free(node);
     }else if(node->type == GROUP){
-        printf("free group next\n");
+        log_info("free group next");
         free_ast(node->group.next);
-        printf("free group\n");
+        log_info("free group");
         free(node);
     }else if(node->type == UNARY){
-        printf("free unary next\n");
+        log_info("free unary next");
         free_ast(node->unary.next);
-        printf("free unary\n");
+        log_info("free unary");
         free(node);
     }else if(node->type == NUMBER){
-        printf("free number\n");
+        log_info("free number");
         free(node);
     }
 }
