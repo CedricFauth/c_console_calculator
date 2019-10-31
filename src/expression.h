@@ -51,4 +51,6 @@ struct ExprNode {
 void print_ast(ExprNode* node);
 void free_ast(ExprNode* node);
 
+ExprNode* new_expr_number(int value);
+
 #endif

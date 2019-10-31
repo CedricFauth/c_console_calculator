@@ -108,3 +108,10 @@ int size(TokenList* list){
     for(TokenNode* node = list->head; node != NULL; node = node->next, c++);
     return c;
 }
+
+TokenNode* get_token(TokenList* l, int index){
+    TokenNode* node = l->head;
+    for(int i = 0; node != NULL && i < index; node = node->next, i++);
+
+    return node;
+}

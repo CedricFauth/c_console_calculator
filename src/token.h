@@ -40,4 +40,6 @@ void free_token_list(TokenList* list);
 
 int size(TokenList* list);
 
+TokenNode* get_token(TokenList* l, int index);
+
 #endif

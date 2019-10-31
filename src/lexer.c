@@ -5,6 +5,9 @@
 #include "token.h"
 #include "logger.h"
 
+extern TokenList* list;
+extern char input[];
+
 bool isDigit(char c){
     return c >= '0' && c <= '9';
 }
@@ -34,12 +37,12 @@ double number(char* string, int *i_ptr){
     return atof(sub_string);
 }
 
-bool generate_tokens(TokenList* list, char* input_str){
+bool generate_tokens(){
     
-    for(int i = 0; i < strlen(input_str); i++){ //until \n linebreak
+    for(int i = 0; i < strlen(input); i++){ //until \n linebreak
         //token_append(list, PLUS, 0.0);
 
-        switch (input_str[i])
+        switch (input[i])
         {
         case '(':
             token_append(list, LEFT_P, 0.0);
@@ -62,18 +65,20 @@ bool generate_tokens(TokenList* list, char* input_str){
         case '\n':
             token_append(list, ENDOFLINE, 0.0);
             break;
+        case ' ':
+            break;
         case 'q':
             return false;
         default:
-            if(isDigit(input_str[i])){
+            if(isDigit(input[i])){
                 printf("is number\n");
-                token_append(list, DOUBLE, number(input_str, &i));
+                token_append(list, DOUBLE, number(input, &i));
             }else{
-                log_err_detail(input_str, "Unknown character", i);
+                log_err_detail(input, "Unknown character", i);
                 return true;
             }
         }
-        //printf("%d\n", (int) *(input_str+i));
+        //printf("%d\n", (int) *(input+i));
 
     }
 

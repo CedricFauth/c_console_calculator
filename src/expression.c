@@ -3,6 +3,36 @@
 #include "expression.h"
 #include "logger.h"
 
+ExprNode* new_expr_binary(ExprNode* left, TokenType op, ExprNode* right){
+    ExprNode* expr = malloc(sizeof(ExprNode));
+    expr->type = BINARY;
+    expr->binary.left = left;
+    expr->binary.op = op;
+    expr->binary.right = right;
+    return expr;
+}
+
+ExprNode* new_expr_group(ExprNode* node){
+    ExprNode* expr = malloc(sizeof(ExprNode));
+    expr->type = GROUP;
+    expr->group.next = node;
+    return expr;
+}
+
+ExprNode* new_expr_unary(ExprNode* node){
+    ExprNode* expr = malloc(sizeof(ExprNode));
+    expr->type = UNARY;
+    expr->unary.next = node;
+    return expr;
+}
+
+ExprNode* new_expr_number(int value){
+    ExprNode* expr = malloc(sizeof(ExprNode));
+    expr->type = NUMBER;
+    expr->number.value = value;
+    return expr;
+}
+
 void free_ast(ExprNode* node){
     if(node == NULL) return;
     if(node->type == BINARY){

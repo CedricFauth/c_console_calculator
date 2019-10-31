@@ -7,14 +7,16 @@
 #include "logger.h"
 #include "token.h"
 #include "expression.h"
+#include "parser.h"
+
+const int BUFFER_SIZE = 128;
+
+TokenList* list;
+char input[BUFFER_SIZE];
 
 int main(){
 
     set_log_level(INFO);
-
-    int BUFFER_SIZE = 128;
-
-    char* input = malloc(sizeof(char) * BUFFER_SIZE);
 
     bool error = false;
 
@@ -70,13 +72,15 @@ int main(){
 
         printf("strlen: %lu\nstring: %s", strlen(input), input);
 
-        TokenList* list = new_token_list();
-        error = generate_tokens(list, input);
+        list = new_token_list();
+        error = generate_tokens();
         print_token_list(list);
 
         if(size(list) > 1 && !error){
             log_info("Continue parsing.");
-            //parser call
+            ExprNode* ast = build_ast();
+            print_ast(ast);
+            free_ast(ast);
         }
         /*else{
             log_warn("Error or list empty.");
@@ -86,6 +90,6 @@ int main(){
 
     } while(strcmp(input, "q\n"));
 
-    free(input);
+    exit(EXIT_SUCCESS);
 
 }
