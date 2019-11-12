@@ -26,7 +26,7 @@ ExprNode* new_expr_unary(ExprNode* node){
     return expr;
 }
 
-ExprNode* new_expr_number(int value){
+ExprNode* new_expr_number(double value){
     ExprNode* expr = malloc(sizeof(ExprNode));
     expr->type = NUMBER;
     expr->number.value = value;

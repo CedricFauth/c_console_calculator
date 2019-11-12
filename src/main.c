@@ -12,59 +12,13 @@
 const int BUFFER_SIZE = 128;
 
 TokenList* list;
-char input[BUFFER_SIZE];
+char input[128];
 
 int main(){
 
     set_log_level(INFO);
 
     bool error = false;
-
-    
-    ExprNode* a = malloc(sizeof(ExprNode));
-    ExprNode* b = malloc(sizeof(ExprNode));
-    ExprNode* c = malloc(sizeof(ExprNode));
-    ExprNode* d = malloc(sizeof(ExprNode));
-    ExprNode* e = malloc(sizeof(ExprNode));
-    ExprNode* f = malloc(sizeof(ExprNode));
-    ExprNode* g = malloc(sizeof(ExprNode));
-
-    g->type = NUMBER;
-    g->number.value = 123.0;
-
-    f->type = NUMBER;
-    f->number.value = -2.25;
-
-    e->type = NUMBER;
-    e->number.value = 1000.0;
-
-    d->type = BINARY;
-    d->binary.op = MINUS;
-    d->binary.left = e;
-    d->binary.right = f;
-
-    c->type = GROUP;
-    c->group.next = d;
-
-    b->type = UNARY;
-    b->unary.next = c;
-
-    a->type = BINARY;
-    a->binary.op = STAR;
-    a->binary.right = b;
-    a->binary.left = g;
-
-    print_ast(a);
-
-    /*
-    free(a);
-    free(b);
-    free(c);
-    free(d);
-    free(e);
-    free(f);*/
-
-    free_ast(a);
 
     do {
 

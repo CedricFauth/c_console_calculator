@@ -68,10 +68,10 @@ bool generate_tokens(){
         case ' ':
             break;
         case 'q':
-            return false;
+            return true;
         default:
             if(isDigit(input[i])){
-                printf("is number\n");
+                log_info("Lexer detects a number");
                 token_append(list, DOUBLE, number(input, &i));
             }else{
                 log_err_detail(input, "Unknown character", i);

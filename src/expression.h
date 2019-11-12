@@ -51,6 +51,9 @@ struct ExprNode {
 void print_ast(ExprNode* node);
 void free_ast(ExprNode* node);
 
-ExprNode* new_expr_number(int value);
+ExprNode* new_expr_binary(ExprNode* left, TokenType op, ExprNode* right);
+ExprNode* new_expr_group(ExprNode* node);
+ExprNode* new_expr_unary(ExprNode* node);
+ExprNode* new_expr_number(double value);
 
 #endif
