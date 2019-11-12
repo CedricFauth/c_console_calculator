@@ -89,7 +89,7 @@ void print_token_list(TokenList* list){
 }
 
 void free_token_list(TokenList* list){
-
+    log_info("Free token list");
     TokenNode* token = list->head;
     TokenNode* tmp;
 
@@ -111,7 +111,7 @@ int size(TokenList* list){
 
 TokenNode* get_token(TokenList* l, int index){
     TokenNode* node = l->head;
-    for(int i = 0; node != NULL && i < index; node = node->next, i++);
+    for(int i = 0; node->next != NULL && i < index; node = node->next, i++);
 
     return node;
 }

@@ -66,7 +66,10 @@ void print_ast(ExprNode* node){
 
 void print_ast_rec(ExprNode* node){
 
-    if(node == NULL) return;
+    if(node == NULL) {
+        printf("NULL"); 
+        return;
+    }
 
     printf("(");
 

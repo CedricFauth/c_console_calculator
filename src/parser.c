@@ -3,7 +3,10 @@
 #include "parser.h"
 #include "logger.h"
 
+ExprNode* addition(int* i_ptr);
+
 extern TokenList* list;
+extern bool error;
 
 bool next_token(TokenType type, int* i_ptr){
            
@@ -15,22 +18,45 @@ bool next_token(TokenType type, int* i_ptr){
 }
 
 ExprNode* primary(int* i_ptr){
-    log_info("Primary detected");
-    ExprNode* expr = new_expr_number(get_token(list, *(i_ptr))->value);
-    //++(*i_ptr);
+    ExprNode* expr;
+    switch (get_token(list, *i_ptr)->type){
+        case DOUBLE:
+            log_info("Primary detected");
+            expr = new_expr_number(get_token(list, *(i_ptr))->value);
+            break;
+        case LEFT_P:
+            log_info("Group detected");
+            ++(*i_ptr);
+            expr = addition(i_ptr);
+            if(next_token(RIGHT_P,i_ptr)){
+                ++(*i_ptr);
+                return new_expr_group(expr);
+            }else{
+                log_err("')' not found\n");
+                error = true;
+            }
+            break;
+        default:
+            expr = NULL;
+            log_err("Equation invalid\n");
+            error = 1;
+            break;
+    }
+    
     return expr;
 }
 
 ExprNode* unary(int* i_ptr){
     ExprNode* expr;
-    TokenType op;
 
-    if((op = get_token(list, *i_ptr)->type) == MINUS){
+    if(get_token(list, *i_ptr)->type == MINUS){
         log_info("Unary detected");
         ++(*i_ptr);
         expr = unary(i_ptr);
         expr = new_expr_unary(expr);
-    }else{
+    }else {
+        log_info("Running primary");
+        printf("TOKEN: %d\n", get_token(list, *i_ptr)->type);
         expr = primary(i_ptr);
     }
 
@@ -75,5 +101,18 @@ ExprNode* addition(int* i_ptr){
 ExprNode* build_ast(){
     log_info("Building ast");
     int i = 0;
-    return addition(&i);
+    ExprNode* expr = addition(&i);
+
+    ++i;
+    
+    if(get_token(list, i)->type == ENDOFLINE){
+        log_warn("EOF");
+    }else
+    {
+        log_err("Next token not ENDOFLINE\n");
+        error = true;
+    }
+    
+    return expr;
+
 }

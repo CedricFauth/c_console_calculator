@@ -4,6 +4,6 @@
 #include <stdbool.h>
 #include "token.h"
 
-bool generate_tokens();
+TokenList* generate_tokens();
 
 #endif

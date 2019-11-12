@@ -7,6 +7,7 @@
 
 extern TokenList* list;
 extern char input[];
+extern bool error;
 
 bool isDigit(char c){
     return c >= '0' && c <= '9';
@@ -37,7 +38,9 @@ double number(char* string, int *i_ptr){
     return atof(sub_string);
 }
 
-bool generate_tokens(){
+TokenList* generate_tokens(){
+
+    TokenList* list = new_token_list();
     
     for(int i = 0; i < strlen(input); i++){ //until \n linebreak
         //token_append(list, PLUS, 0.0);
@@ -68,20 +71,22 @@ bool generate_tokens(){
         case ' ':
             break;
         case 'q':
-            return true;
+            error = true;
+            break;
         default:
             if(isDigit(input[i])){
                 log_info("Lexer detects a number");
                 token_append(list, DOUBLE, number(input, &i));
             }else{
                 log_err_detail(input, "Unknown character", i);
-                return true;
+                error = true;
+                break;
             }
         }
         //printf("%d\n", (int) *(input+i));
 
     }
 
-    return false;
+    return list;
 
 }

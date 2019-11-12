@@ -9,37 +9,47 @@
 #include "expression.h"
 #include "parser.h"
 
-const int BUFFER_SIZE = 128;
+const int BUFFER_SIZE = 256;
 
 TokenList* list;
-char input[128];
+char input[256];
+bool error = false;
 
 int main(){
 
     set_log_level(INFO);
 
-    bool error = false;
-
     do {
+        error = false;
 
+        // step 1: input
         fgets(input, BUFFER_SIZE, stdin);
 
         printf("strlen: %lu\nstring: %s", strlen(input), input);
 
-        list = new_token_list();
-        error = generate_tokens();
+        // step 2: lexing
+        list = generate_tokens();
         print_token_list(list);
 
-        if(size(list) > 1 && !error){
-            log_info("Continue parsing.");
-            ExprNode* ast = build_ast();
-            print_ast(ast);
-            free_ast(ast);
+        if(size(list) <= 1 || error){
+            free_token_list(list);
+            continue;
         }
-        /*else{
-            log_warn("Error or list empty.");
-        }*/
 
+        // step 3: parsing
+        log_info("Continue with parsing.");
+        ExprNode* ast = build_ast();
+
+        if(error){
+            free_ast(ast);
+            free_token_list(list);
+            continue;
+        }
+
+        log_info("Continue with evaluating.");
+
+        print_ast(ast);
+        free_ast(ast);
         free_token_list(list);
 
     } while(strcmp(input, "q\n"));
