@@ -20,7 +20,7 @@ double number(char* string, int *i_ptr){
     }while(isDigit(string[*i_ptr]) || string[(*i_ptr)] == '.');
         
     
-    printf("stop is: %d\n", *i_ptr);
+    //printf("stop is: %d\n", *i_ptr);
     int stop = *i_ptr;
 
     char sub_string[stop-start+1];

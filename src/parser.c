@@ -56,7 +56,7 @@ ExprNode* unary(int* i_ptr){
         expr = new_expr_unary(expr);
     }else {
         log_info("Running primary");
-        printf("TOKEN: %d\n", get_token(list, *i_ptr)->type);
+        //printf("TOKEN: %d\n", get_token(list, *i_ptr)->type);
         expr = primary(i_ptr);
     }
 
@@ -88,7 +88,7 @@ ExprNode* addition(int* i_ptr){
         ++(*i_ptr);
         // get operator here
         TokenType op = get_token(list, *i_ptr)->type;
-        printf("OP is: %d\n", op);
+        //printf("OP is: %d\n", op);
         ++(*i_ptr);
         ExprNode* right = multiplication(i_ptr);
         expr = new_expr_binary(expr, op, right);

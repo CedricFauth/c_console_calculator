@@ -8,16 +8,18 @@
 #include "token.h"
 #include "expression.h"
 #include "parser.h"
+#include "interpreter.h"
 
 const int BUFFER_SIZE = 256;
+char input[256];
 
 TokenList* list;
-char input[256];
+
 bool error = false;
 
 int main(){
 
-    set_log_level(INFO);
+    set_log_level(ERROR);
 
     do {
         error = false;
@@ -25,11 +27,11 @@ int main(){
         // step 1: input
         fgets(input, BUFFER_SIZE, stdin);
 
-        printf("strlen: %lu\nstring: %s", strlen(input), input);
+        //printf("strlen: %lu\nstring: %s", strlen(input), input);
 
         // step 2: lexing
         list = generate_tokens();
-        print_token_list(list);
+            //print_token_list(list);
 
         if(size(list) <= 1 || error){
             free_token_list(list);
@@ -46,9 +48,12 @@ int main(){
             continue;
         }
 
-        log_info("Continue with evaluating.");
-
-        print_ast(ast);
+        // step 4: interpretation
+        log_info("Continue with interpretation.");
+        double result = interpret(ast);
+            //print_ast(ast);
+        printf(" = %f\n", result);
+        
         free_ast(ast);
         free_token_list(list);
 
