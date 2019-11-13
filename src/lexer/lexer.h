@@ -2,7 +2,7 @@
 #define LEXER
 
 #include <stdbool.h>
-#include "token.h"
+#include "../utils/token.h"
 
 TokenList* generate_tokens();
 

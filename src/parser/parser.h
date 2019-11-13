@@ -1,8 +1,8 @@
 #ifndef PARSER
 #define PARSER
 
-#include "token.h"
-#include "expression.h"
+#include "../utils/token.h"
+#include "../utils/expression.h"
 
 ExprNode* build_ast();
 

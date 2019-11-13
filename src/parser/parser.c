@@ -1,7 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include "../parser/parser.h"
+#include "../logger/logger.h"
 #include "parser.h"
-#include "logger.h"
 
 ExprNode* addition(int* i_ptr);
 

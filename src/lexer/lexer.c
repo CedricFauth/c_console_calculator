@@ -2,8 +2,8 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
-#include "token.h"
-#include "logger.h"
+#include "../logger/logger.h"
+#include "lexer.h"
 
 extern TokenList* list;
 extern char input[];

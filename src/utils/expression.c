@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "expression.h"
-#include "logger.h"
+#include "../logger/logger.h"
 
 ExprNode* new_expr_binary(ExprNode* left, TokenType op, ExprNode* right){
     ExprNode* expr = malloc(sizeof(ExprNode));

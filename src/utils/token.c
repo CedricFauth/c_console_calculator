@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "token.h"
-#include "logger.h"
+#include "../utils/token.h"
+#include "../logger/logger.h"
 
 TokenNode* new_token(TokenType type, double value){
     TokenNode* token = malloc(sizeof(TokenNode));

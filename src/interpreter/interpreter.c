@@ -1,7 +1,8 @@
 #include <stdlib.h>
-#include "logger.h"
-#include "token.h"
-#include "expression.h"
+#include "../logger/logger.h"
+#include "../utils/token.h"
+#include "../utils/expression.h"
+#include "interpreter.h"
 
 double interpret(ExprNode* node){
 

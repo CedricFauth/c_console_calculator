@@ -3,12 +3,12 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include "lexer.h"
-#include "logger.h"
-#include "token.h"
-#include "expression.h"
-#include "parser.h"
-#include "interpreter.h"
+#include "lexer/lexer.h"
+#include "logger/logger.h"
+#include "utils/token.h"
+#include "utils/expression.h"
+#include "parser/parser.h"
+#include "interpreter/interpreter.h"
 
 const int BUFFER_SIZE = 256;
 char input[256];

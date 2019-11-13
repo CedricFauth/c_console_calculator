@@ -1,6 +1,6 @@
 #ifndef INTERPRETER
 #define INTERPRETER
-#include "interpreter.h"
+//#include "interpreter.h"
 
 double interpret(ExprNode* node);
 

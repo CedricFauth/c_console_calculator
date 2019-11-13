@@ -1,7 +1,7 @@
 #ifndef EXPRESSION
 #define EXPRESSION
 
-#include "token.h"
+#include "../utils/token.h"
 
 typedef struct ExprNode ExprNode;
 
